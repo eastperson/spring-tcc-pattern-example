@@ -1,3 +1,5 @@
 package com.ep.account.exception
 
-class WithdrawException : RuntimeException()
+class WithdrawException(
+    message: String
+) : RuntimeException(message)

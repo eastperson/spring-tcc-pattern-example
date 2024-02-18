@@ -15,13 +15,30 @@ class RestControllerExceptionHandler {
 
     private val log = logger()
 
+    @ExceptionHandler(Exception::class)
+    fun exceptionHandler(request: HttpServletRequest, e: Exception): ResponseEntity<Response> {
+        if (e is DepositException) {
+            return depositExceptionHandler(request, e)
+        } else if (e is WithdrawException) {
+            return withdrawExceptionHandler(request, e)
+        }
+
+        log.info("request body: $request, error msg: ${e.message}, exception type: ${e::class}")
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(
+                Response(
+                    message = "${e.message}"
+                )
+            )
+    }
+
     @ExceptionHandler(DepositException::class)
     fun depositExceptionHandler(request: HttpServletRequest, e: Exception): ResponseEntity<Response> {
         log.info("request body: $request, error msg: ${e.message}, exception type: ${e::class}")
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(
                 Response(
-                    message = "${DepositException::class.simpleName}"
+                    message = "${e.message}"
                 )
             )
     }
@@ -32,7 +49,7 @@ class RestControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(
                 Response(
-                    message = "${WithdrawException::class.simpleName}"
+                    message = "${e.message}"
                 )
             )
     }

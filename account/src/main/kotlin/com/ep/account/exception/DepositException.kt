@@ -1,3 +1,5 @@
 package com.ep.account.exception
 
-class DepositException : RuntimeException()
+class DepositException(
+    message: String
+) : RuntimeException(message)

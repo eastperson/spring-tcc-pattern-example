@@ -6,5 +6,6 @@ import java.math.BigDecimal
 data class WithdrawRequest(
     val accountNumber: String,
     val amount: BigDecimal,
-    val command: Command
+    val command: Command,
+    val tccStateId: Long?
 )

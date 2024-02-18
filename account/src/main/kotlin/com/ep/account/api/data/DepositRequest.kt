@@ -6,5 +6,6 @@ import java.math.BigDecimal
 data class DepositRequest(
     val accountNumber: String,
     val amount: BigDecimal,
-    val command: Command
+    val command: Command,
+    val tccStateId: Long?
 )

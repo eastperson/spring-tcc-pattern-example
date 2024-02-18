@@ -8,6 +8,17 @@ Content-Type: application/json
   "command": "STANDARD"
 }
 
+### WITHDRAW Exception
+POST localhost:8080/api/account/transfer
+Content-Type: application/json
+
+{
+  "withdrawAccountNumber": "12345678",
+  "depositAccountNumber": "98765432",
+  "amount": 10000,
+  "command": "WITHDRAW_EXCEPTION"
+}
+
 ### DEPOSIT Exception
 POST localhost:8080/api/account/transfer
 Content-Type: application/json
@@ -19,16 +30,39 @@ Content-Type: application/json
 "command": "DEPOSIT_EXCEPTION"
 }
 
-### WITHDRAW Exception
-POST localhost:8080/api/account/transfer
+### TCC Transfer
+POST localhost:8080/api/account/transfer-tcc
 Content-Type: application/json
 
 {
 "withdrawAccountNumber": "12345678",
 "depositAccountNumber": "98765432",
 "amount": 10000,
-"command": "WITHDRAW_EXCEPTION"
+"command": "STANDARD"
 }
+
+### WITHDRAW Exception
+POST localhost:8080/api/account/transfer-tcc
+Content-Type: application/json
+
+{
+  "withdrawAccountNumber": "12345678",
+  "depositAccountNumber": "98765432",
+  "amount": 10000,
+  "command": "WITHDRAW_EXCEPTION"
+}
+
+### DEPOSIT Exception
+POST localhost:8080/api/account/transfer-tcc
+Content-Type: application/json
+
+{
+  "withdrawAccountNumber": "12345678",
+  "depositAccountNumber": "98765432",
+  "amount": 10000,
+  "command": "DEPOSIT_EXCEPTION"
+}
+
 
 ### get account
 GET localhost:8080/api/account/12345678
