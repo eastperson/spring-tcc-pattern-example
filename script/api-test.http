@@ -1,0 +1,39 @@
+POST localhost:8080/api/account/transfer
+Content-Type: application/json
+
+{
+  "withdrawAccountNumber": "12345678",
+  "depositAccountNumber": "98765432",
+  "amount": 10000,
+  "command": "STANDARD"
+}
+
+### DEPOSIT Exception
+POST localhost:8080/api/account/transfer
+Content-Type: application/json
+
+{
+"withdrawAccountNumber": "12345678",
+"depositAccountNumber": "98765432",
+"amount": 10000,
+"command": "DEPOSIT_EXCEPTION"
+}
+
+### WITHDRAW Exception
+POST localhost:8080/api/account/transfer
+Content-Type: application/json
+
+{
+"withdrawAccountNumber": "12345678",
+"depositAccountNumber": "98765432",
+"amount": 10000,
+"command": "WITHDRAW_EXCEPTION"
+}
+
+### get account
+GET localhost:8080/api/account/12345678
+Content-Type: application/json
+
+### get account
+GET localhost:8080/api/account/98765432
+Content-Type: application/json
