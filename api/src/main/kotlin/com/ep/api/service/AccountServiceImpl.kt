@@ -14,8 +14,8 @@ import java.math.BigDecimal
 
 @Service
 class AccountServiceImpl(
-    val depositProcessor: DepositProcessor,
-    val withdrawProcessor: WithdrawProcessor,
+    val depositService: DepositService,
+    val withdrawService: WithdrawService,
     val queryProcessor: QueryProcessor
 ) : AccountService {
 
@@ -27,12 +27,12 @@ class AccountServiceImpl(
 
         // withdraw
         log.info("[WITHDRAW] call. accountNumber:${withdrawAccountNumber}, amount:${amount}")
-        val withdrawAccount = withdrawProcessor.withdraw(withdrawAccountNumber, amount, command)
+        val withdrawAccount = withdrawService.withdraw(withdrawAccountNumber, amount, command)
         log.info("[WITHDRAW] Success. accountNumber:${withdrawAccount.accountNumber}, accountName:${withdrawAccount.accountName}, balance:${withdrawAccount.balance}")
 
         // deposit
         log.info("[DEPOSIT] call. accountNumber:${withdrawAccountNumber}, amount:${amount}")
-        val depositAccount = depositProcessor.deposit(depositAccountNumber, amount, command)
+        val depositAccount = depositService.deposit(depositAccountNumber, amount, command)
         log.info("[DEPOSIT] Success. accountNumber:${withdrawAccount.accountNumber}, accountName:${withdrawAccount.accountName}, balance:${withdrawAccount.balance}")
 
         return TransferResponse(
