@@ -1,16 +1,21 @@
 package com.ep.account.domain
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.Table
 import java.math.BigDecimal
 
 @Entity
+@Table(name = "account")
 class Account(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
+    @Column(name = "account_number")
     val accountNumber: String,
+    @Column(name = "account_name")
     val accountName: String,
     var balance: BigDecimal
 ) {

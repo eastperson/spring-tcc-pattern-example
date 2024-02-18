@@ -2,12 +2,9 @@ package com.ep.api.service
 
 import com.ep.account.Command
 import com.ep.account.data.AccountInfo
-import com.ep.api.controller.data.TransferResponse
 import com.ep.account.logger
-import com.ep.account.service.DepositProcessor
-import com.ep.account.service.QueryProcessor
-import com.ep.account.service.WithdrawProcessor
 import com.ep.api.controller.data.AccountResponse
+import com.ep.api.controller.data.TransferResponse
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.math.BigDecimal
@@ -15,8 +12,7 @@ import java.math.BigDecimal
 @Service
 class AccountServiceImpl(
     val depositService: DepositService,
-    val withdrawService: WithdrawService,
-    val queryProcessor: QueryProcessor
+    val withdrawService: WithdrawService
 ) : AccountService {
 
     val log = logger()
@@ -42,7 +38,7 @@ class AccountServiceImpl(
     }
 
     override fun query(accountNumber: String): AccountResponse {
-        val accountInfo = queryProcessor.query(accountNumber)
+        val accountInfo = depositService.query(accountNumber) ?: withdrawService.query(accountNumber)!!
         return AccountResponse(
             accountNumber = accountInfo.accountNumber,
             accountName = accountInfo.accountName,

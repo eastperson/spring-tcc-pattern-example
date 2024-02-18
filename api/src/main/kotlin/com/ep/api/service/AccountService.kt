@@ -5,7 +5,5 @@ import com.ep.api.controller.data.AccountResponse
 import com.ep.api.controller.data.TransferResponse
 import java.math.BigDecimal
 
-interface AccountService {
-    fun transfer(depositAccountNumber: String, withdrawAccountNumber: String, amount: BigDecimal, command: Command): TransferResponse
-    fun query(accountNumber: String): AccountResponse
+interface AccountService : TransferLogic, QueryLogic {
 }

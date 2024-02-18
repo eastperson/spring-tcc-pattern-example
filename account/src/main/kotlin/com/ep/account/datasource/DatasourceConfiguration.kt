@@ -12,7 +12,17 @@ import javax.sql.DataSource
 class DataSourceConfig {
 
     @Bean
-    @Profile("ep1")
+    @Profile("monolithic")
+    fun monolithicDatasource(): DataSource {
+        return DataSourceBuilder.create().type(HikariDataSource::class.java)
+            .url("jdbc:h2:mem:epdb1")
+            .username("root")
+            .password("root")
+            .build()
+    }
+
+    @Bean
+    @Profile("deposit")
     fun ep1Datasource(): DataSource {
         return DataSourceBuilder.create().type(HikariDataSource::class.java)
             .url("jdbc:h2:mem:epdb1")
@@ -22,7 +32,7 @@ class DataSourceConfig {
     }
 
     @Bean
-    @Profile("ep2")
+    @Profile("withdraw")
     fun ep2Datasource(): DataSource {
         return DataSourceBuilder.create().type(HikariDataSource::class.java)
             .url("jdbc:h2:mem:epdb2")
